@@ -1,0 +1,2 @@
+output file_name scene +args:
+    uv run manim src/{{file_name}}.py {{scene}} {{args}}
