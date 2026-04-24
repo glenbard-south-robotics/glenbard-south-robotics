@@ -41,8 +41,33 @@ Generally you should aim to provide a brief description of what you changed, and
 
 # Branches
 
-Git branches are like versions of a codebase, a good practice is to have a stable branch that you know will always work, and another branch for development that may have broken behavior. Once you know the development branch works fine and is ready to use, you should **merge** the branch by opening a **Pull Request**. 
+Git branches are like versions of a codebase, a good practice is to have a stable branch that you know will always work, and another branch for development that may have broken behavior. Once you know the development branch works fine and is ready to use, you should **merge** the branch by opening a **Pull Request**. See below for an example:
+
+```mermaid
+---
+config:
+  theme: 'neutral'
+  gitGraph:
+    showBranches: true
+    showCommitLabel: false
+---
+      gitGraph
+        commit
+        branch dev
+        checkout dev
+        branch feature
+        checkout feature
+        commit type:HIGHLIGHT
+        checkout dev
+        commit type:NORMAL
+        merge feature
+        checkout main
+        merge dev
+```
+
+The Git graph shows `dev` should inherit from `main` and that `feature` branches should inherit from dev, feature branches should **merge** into dev before merging into main.
 
 ## Pull Requests
 
 Pull requests are a specific way to merge branches, a Pull Request is a GitHub feature that allows people to comment, and request changes before merging the branches. I recommend always using pull requests instead of manually merging commits.
+
