@@ -37,7 +37,7 @@ $$
 In 2-dimensions — both quantities become vectors, and $e(t)$ points from where the arm *is* to where it *should be*.
 
 <video autoplay muted playsinline controls>  
-<source src="/static/videos/concepts/pid/VectorErrorFunction.webm" type="video/webm">  
+<source src="/static/concepts/pid/VectorErrorFunction.webm" type="video/webm">  
 </video>
 In Kotlin, computing the error for a motor is a single line:
 
@@ -61,8 +61,9 @@ Against any constant opposing force — such as gravity on an arm or drivetrain 
 Increasing $K_P$​ reduces this error by making the controller more aggressive. However, in real systems with inertia (like motors and arms), high $K_P$​ can cause the system to **overshoot the target and oscillate**. This behavior comes from the system’s dynamics, not the P term alone.
 
 Oscillation happens because the system has inertia—it keeps moving after the controller tells it to stop. The controller then overcorrects in the opposite direction, creating a cycle.
+
 <video autoplay muted playsinline controls>  
-<source src="/static/videos/concepts/pid/PControllerComparison.webm" type="video/webm">  
+<source src="/static/concepts/pid/PControllerComparison.webm" type="video/webm">  
 </video>
 
 A proportional controller is like a spring: the farther you stretch it, the harder it pulls back—but it doesn’t know anything about momentum.
@@ -99,7 +100,7 @@ where $\Delta$ is the time elapsed since the last loop, obtainable from `Elapsed
 **The problem with I:** Too much integral gain causes **windup** — the accumulator grows very large during a long approach, then massively overshoots when the target is reached. The standard fix is to **clamp** the integrator: stop accumulating once the integral term alone would saturate the output.
 
 <video autoplay muted playsinline controls>  
-<source src="/static/videos/concepts/pid/IntegralWindup.webm" type="video/webm">  
+<source src="/static/concepts/pid/IntegralWindup.webm" type="video/webm">  
 </video>
 
 In Kotlin, the integral is a running sum maintained between loop iterations:
@@ -141,7 +142,7 @@ $$
 **The problem with D:** Derivative control amplifies noise. A jittery encoder makes $\frac{de}{dt}$​ jump wildly, producing erratic spikes. The standard remedy is to differentiate the **measured position** directly (not the error) and apply a **low-pass filter** to smooth the result.
 
 <video autoplay muted playsinline controls>  
-<source src="/static/videos/concepts/pid/DerivativeEffect.webm" type="video/webm">  
+<source src="/static/concepts/pid/DerivativeEffect.webm" type="video/webm">  
 </video>
 
 In Kotlin, the derivative is the difference between consecutive errors divided by elapsed time:
@@ -180,7 +181,7 @@ Each term addresses a different part of time — P reacts now, I corrects the hi
 > D is velocity (how fast you're moving)
 
 <video autoplay muted playsinline controls>  
-<source src="/static/videos/concepts/pid/FullPIDComparison.webm" type="video/webm">  
+<source src="/static/concepts/pid/FullPIDComparison.webm" type="video/webm">  
 </video>
 
 A complete, reusable PID class in Kotlin for FTC:
