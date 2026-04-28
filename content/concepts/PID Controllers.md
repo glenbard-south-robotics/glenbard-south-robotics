@@ -303,3 +303,4 @@ A practical starting procedure for tuning in FTC:
 1. Set $K_I=K_D=0$. Raise $K_P$​ until the motor reaches the target quickly, accepting some overshoot.
 2. Raise $K_D$​ to damp the overshoot without slowing the initial response excessively.
 3. If steady-state error remains under load, introduce a small $K_I$​ and watch carefully for windup.
+
